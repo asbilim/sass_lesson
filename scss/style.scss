@@ -1,0 +1,176 @@
+/* google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
+/* end google fonts */
+
+
+
+/* variables */
+
+$italic-font:'Titillium Web', sans-serif;
+$normal-font:'PT Sans', sans-serif;
+$paragraph-color:#666;
+$title-color:#222;
+$gris:#e6e6e6;
+$green:green;
+$background_one:#f8f8f8;
+$blue:rgb(37, 150, 190);
+$marron:rgba(239,128,98,255);
+$white:rgba(255,255,255,255);
+
+
+/* end variables*/
+
+
+/* mixins */
+
+@mixin paragraph{
+    font-family: $normal-font;
+    color: $paragraph-color;
+    font-size: 1.9rem;
+    line-height: 1.4;
+    text-align: start;
+    text-transform: lowercase;
+}
+
+@mixin span($color){
+    @if(lightness($color)<25%){
+        $color : lighten($color,35%);
+    }
+    @else{
+        $color : darken($color,10%);
+    }
+    color: $color;
+}
+
+@mixin title($size,$color,$span-color){
+    font-size: $size;
+    font-family: $normal-font;
+    font-weight: bold;
+    letter-spacing: .15rem;
+    span{
+        @include span($span-color);
+    }
+}
+
+
+@mixin button{
+    background-color: $marrin;
+    color: $white;
+    border-radius: 1rem;
+    line-height: 1;
+    padding: 1rem 2.5rem;
+}
+
+
+@mixin flex($direction){
+    display: flex;
+    flex-direction: $direction;
+}
+
+/* end mixins */
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    list-style: none;
+}
+%img{
+    object-fit: cover;
+    width: 4rem;
+    height: 4rem;
+}
+img{
+    @extend %img;
+}
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+body{
+    padding: 10rem;
+    min-height: 100vh;
+    border: 2px solid;
+    .container{
+        margin: auto;
+        padding: 5rem;
+        width: 100%;
+        background-color: $background_one;
+        .header{
+            @include flex(row);
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid;
+            border-radius: 2rem;
+            .home{
+                @include flex(row);
+                justify-content: space-between;
+                .button{
+                    border: 1px solid ;
+                    width: 4rem;
+                    height: 4rem;
+                    border-radius: 50%;
+                    background-color: lighten($green,60%);
+                    text-align: center;
+                    @include flex(row);
+                    justify-content: center;
+                    align-items: center;
+                    i{
+                        font-size: 2rem;
+                        margin: auto;
+                    }
+                }
+                ul{
+                    padding: 0 5rem;
+                    @include flex(row);
+                    justify-content: space-around;
+                    align-items: center;
+                    gap: 2rem;
+                    li{
+                        a{
+                            font-size: 1.7rem;
+                            color: $title-color;
+                        }
+                    }
+                }
+            }
+            .languages{
+                width: 4rem;
+                height: 4rem;
+                border-radius: 50%;
+                border: 1px solid ;
+                text-align: center;
+                @include flex(row);
+                justify-content: center;
+                align-items: center;
+                span{
+                    font-weight: bold;
+                    background: none;
+                    border: 0;
+                }
+            }
+        }
+    }
+}
+
+.main{
+    margin: 5rem 0;
+    padding: 2rem 2rem;
+    h2{
+        @include title(2.5rem,$title-color,$green);
+    }
+    @include flex(row);
+    justify-content: space-between;
+    align-items: center;
+    img{
+        width: 65rem;
+        height: auto;
+        object-fit: cover;
+    }
+}
